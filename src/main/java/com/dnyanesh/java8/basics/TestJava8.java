@@ -32,7 +32,8 @@ public class TestJava8 {
 		System.out.println(emp);
 
 		// to get all employees with name Gokul
-		List<Employee> collect = employees.stream().filter(e -> e.getName().equals("Gokul")).collect(Collectors.toList());
+		List<Employee> collect = employees.stream().filter(e -> e.getName().equals("Gokul"))
+				.collect(Collectors.toList());
 		System.out.println(employees.stream().filter(e -> e.getName().equals("Gokul")).collect(Collectors.toList()));
 
 		// Find max age of employee
@@ -48,6 +49,16 @@ public class TestJava8 {
 
 		// square the all numbers and find average of numbers greater than 50
 		System.out.println(list.stream().mapToInt(n -> n * n).filter(n -> n > 50).average());
+
+		// Map employees list to the person pojo list
+
+		List<Person> persons = employees.stream().map(employee -> {
+			Person person = Person.builder().firstname(employee.getName()).age(employee.getAge())
+					.sal(employee.getSalary()).build();
+			return person;
+		}).collect(Collectors.toList());
+
+		System.out.println(persons);
 
 	}
 
